@@ -27,8 +27,7 @@ int GetRandomIndex()
 	struct timeval tv;
 	gettimeofday(&tv,NULL);
 	srand(tv.tv_usec);
-//	int n = (1 + (int)(RAND_MAX*rand()/(RAND_MAX + 1.0)));
-	int n = rand()*300;
+	int n = rand()*3;
 	if(n > 0)
 		return n;
 	return 0-n;
@@ -84,7 +83,7 @@ void* ReadOperation(void * threadIn)
 
 	char sqlc[] = "select * from t where id = "; 
 	int threadIndex = *(int*)threadIn; 
-	printf("this ReadOperation thread id is->%d \n",threadIndex);
+	//printf("this ReadOperation thread id is->%d \n",threadIndex);
 
 	char sqlExp[50] = {0}; 
 	int ret; 
@@ -119,7 +118,7 @@ void* WriteOperation(void * threadIn)
 
 	char sqlc[] = "insert into t values() "; 
 	int threadIndex = *(int*)threadIn; 
-	printf("this WriteOperation thread id is->%d \n",threadIndex);
+	//printf("this WriteOperation thread id is->%d \n",threadIndex);
 
 	char sqlExp[50] = {0}; 
 	int ret = 0xf; 
@@ -135,7 +134,7 @@ void* WriteOperation(void * threadIn)
 			ret = sqlite3_exec(dbHandle,sqll,NULL,NULL,&err); 
 			if(ret != SQLITE_OK)
 			{
-				printf("insert error!!!press enter continue\n%s\n",err); 
+				//printf("insert error!!!press enter continue\n%s\n",err); 
 				//getchar(); 
 			}
 		}
@@ -156,7 +155,7 @@ void* RWOperation(void * threadIn)
 
 	char sqlc[] = "select * from t where id = "; 
 	int threadIndex = *(int*)threadIn; 
-	printf("this RWOperation thread id is->%d \n",threadIndex);
+	//printf("this RWOperation thread id is->%d \n",threadIndex);
 
 	char sqlExp[50] = {0}; 
 	int ret = 0xf; 
